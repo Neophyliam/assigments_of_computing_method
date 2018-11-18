@@ -25,9 +25,6 @@ def qr(a, b):
             a[k, j] = a[k, j] - beta * a[k, k]
             for i in range(k + 1, m):
                 a[i, j] = a[i, j] - beta * a[i, k]
-            # Can the above 3 lines be substituted by these two lines?
-            # for i in range(k, m + 1):
-            #     a[i, j] = a[i, j] - beta * a[i, k]
     if m == n:
         d[n-1] = a[n-1, n-1]
     if m > n:
@@ -41,9 +38,6 @@ def qr(a, b):
         a[n-1, n] = a[n-1, n] - beta * a[n-1, n-1]
         for i in range(n, m):
             a[i, n] = a[i, n] - beta * a[i, n-1]
-    # Can the above 3 lines be substituted by these two lines?
-    # for i in range(n-1, m):
-    #     a[i, j] = a[i, j] - beta * a[i, k]
     x = np.zeros(n)
     x[n-1] = a[n-1, n] / d[n-1]
     for k in range(n-2, -1, -1):
