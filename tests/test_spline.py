@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 
-from spline import spline
+from spline import spline, plot_points
 
 
 class TestChase(unittest.TestCase):
@@ -19,3 +19,15 @@ class TestChase(unittest.TestCase):
             [5, -60, 208, -163]
         ])
         self.assertTrue(np.allclose(results, expected_results, atol=self.epsilon))
+
+    def test_plot_points(self):
+        x = [-3., -1., 0., 3., 4.]
+        y = [7., 11., 26., 56., 29.]
+        coeffs = np.array(spline(x, y, 1))
+        plot_x, plot_y = plot_points(x, coeffs)
+        self.assertEqual(len(plot_x), len(plot_y))
+        print('number of plot points: %d' % len(plot_x))
+        x1 = plot_x[:-1]
+        x2 = plot_x[1:]
+        for i in range(len(plot_x)-1):
+            self.assertGreater(x2[i], x1[i])
