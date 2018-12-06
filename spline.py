@@ -91,3 +91,34 @@ def spline(x, y, bound, *args):
     for i in range(1, n):
         coeffs.append(get_coeff(x[i], x[i-1], y[i], y[i-1], M[i], M[i-1]))
     return coeffs
+
+
+def plot_points(x, coeffs, n=100):
+    """
+    Give a series of plot point.
+
+    `x` should be same as the `x` argument in `spline` function, which
+    specify the domain for each spline function. 
+
+    `coeffs` is the result of `spline` function.
+
+    `n` is the desired number of plot points from `x[0]` to `x[-1]`.
+
+    Return a list of x values for plot points and a list of y values for 
+    plot points.
+    """
+    seg_num = len(x) - 1
+    result_x, result_y = [], []
+    for i in range(seg_num):
+        point_num = round((x[i+1]-x[i])/(x[-1]-x[0])*n)
+        coeff = np.array(coeffs[i]).reshape(1, 4)
+        x_in_seg = np.linspace(x[i], x[i+1], point_num)
+        bases = np.array([x_in_seg**3, x_in_seg**2, x_in_seg, np.ones(len(x_in_seg))])
+        y_in_seg = np.dot(coeff, bases).reshape(-1)
+        result_x.extend(x_in_seg)
+        result_y.extend(y_in_seg)
+        last_x = result_x.pop()
+        last_y = result_y.pop()
+    result_x.append(last_x)
+    result_y.append(last_y)
+    return result_x, result_y
