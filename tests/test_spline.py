@@ -20,6 +20,9 @@ class TestChase(unittest.TestCase):
         ])
         self.assertTrue(np.allclose(results, expected_results, atol=self.epsilon))
 
+
+class TestPlotPoints(unittest.TestCase):
+
     def test_plot_points(self):
         x = [-3., -1., 0., 3., 4.]
         y = [7., 11., 26., 56., 29.]
