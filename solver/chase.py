@@ -8,15 +8,13 @@ def chase(A, d):
     if A.ndim != 2 or A.shape[0] != n or A.shape[1] != n:
         raise AttributeError('The shape of argument `A` and `d` '
                 'does not match')
+    a0 = np.diag(A, -1)
+    b = np.diag(A, 0)
+    c0 = np.diag(A, 1)
     a = np.empty(n)
-    b = np.empty(n)
+    a[1:] = a0
     c = np.empty(n)
-    for i in range(n):
-        b[i] = A[i, i]
-        if i != 0:
-            a[i] = A[i, i-1]
-        if i != n-1:
-            c[i] = A[i, i+1]
+    c[:-1] = c0
     return chase2(a, b, c, d)
 
 
