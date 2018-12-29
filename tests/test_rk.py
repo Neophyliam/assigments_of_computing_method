@@ -15,7 +15,7 @@ def f(x, y):
 class TestRK(unittest.TestCase):
 
     def test_rk(self):
-        y = rk(f, [-1., 3, 2], [0., 1.], 0.05)
+        _, y = rk(f, [-1., 3, 2], [0., 1.], 0.05)
         expect_result = math.e + 1
         error = y[-1][0] - expect_result
         print('error for test case of RK: {}'.format(error))

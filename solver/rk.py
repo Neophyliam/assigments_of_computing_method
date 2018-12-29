@@ -15,4 +15,4 @@ def rk(f, y0, bound, h):
         k3 = h*f(x[i-1]+h/2, y[i-1]+k2/2.)
         k4 = h*f(x[i-1]+h, y[i-1]+k3)
         y[i] = y[i-1] + (k1+2*k2+2*k3+k4)/6.0
-    return y
+    return x, y
